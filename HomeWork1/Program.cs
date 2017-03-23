@@ -11,14 +11,15 @@ namespace HomeWork1
             do
             {
                 Console.Clear();
-                int[] nums = new int[3];
+                List <int> numbers = new List <int>();
+                List<int> result = new List<int>();
 
                 for (int i = 0; i < 3; i++)
                 {
                     try
                     {
                         Console.Write($"Введите {i + 1}-е число: ");
-                        nums[i] = Convert.ToInt32(Console.ReadLine());
+                        numbers.Add(Convert.ToInt32(Console.ReadLine()));
                         Console.Beep();
                     }
                     catch
@@ -28,52 +29,52 @@ namespace HomeWork1
                     }
                 }
 
-                Console.WriteLine($"\nМинимальным является число: {nums.Min()}");
+                Console.WriteLine($"\nМинимальным является число: {numbers.Min()}");
                 Console.WriteLine("\nПоследовательность Фибоначчи:\n");
 
                 for (int i = 0; i < 3; i++)
                 {
-                    Console.WriteLine(Fib(nums[i]));
-                }
+                    string s = "";
+                    result.AddRange(Fib(numbers[i]));
+                    for (int j = 0; j < result.Count; j++)
+                    {
+                        s += result[j] + " ";
+                    }
+                    Console.WriteLine(s);
+                    result.Clear();
+                }               
 
                 Console.WriteLine("\nЕсли Вам надоела эта бесполезная программа, нажмите Esc\nЕсли Вы хотите попробовать еще раз крашнуть программу, нажмите любую кнопку\n");
             }
             while ((Console.ReadKey(true).Key != ConsoleKey.Escape));
         }
 
-        static string Fib(int a)
-        {
-
-            string s = "";
+        static List <int> Fib(int a)
+        {            
             List<int> seq = new List<int>();
-
+            seq.Add(0);
+            
             if (a <= 1)
-            {
-                return "empty";
+            {                
+                return seq;
             }
 
-            else if (a == 2)
+            seq.Add(1);
+            seq.Add(1);
+
+            if (a == 2)
             {
-                return "0 1 1";
+                return seq;
             }
 
             else
             {
-                seq.Add(0);
-                seq.Add(1);
-                seq.Add(1);
-
-                for (int i = 3; seq[i - 1] + seq[i - 2] < a; i++)
+                for (int i = 3, cur = seq[i - 1] + seq[i - 2]; cur < a; cur += seq[i - 1], i++)
                 {
-                    seq.Add(seq[i - 1] + seq[i - 2]);
+                    seq.Add(cur);
                 }
-
-                for (int i = 0; i < seq.Count; i++)
-                {
-                    s += seq[i] + " ";
-                }
-
-                return s;
+                
+                return seq;
             }
         }
     }
