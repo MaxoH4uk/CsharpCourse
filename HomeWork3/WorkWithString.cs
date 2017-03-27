@@ -16,7 +16,23 @@ namespace HomeWork3
 
         public bool isPolindrom()
         {
-            if (returnReverseString().Equals(_inputString))
+            string headOfString;
+            string tailOfString;
+            string inputStringWithoutSpaces = _inputString.Replace(" ", string.Empty);
+            if (inputStringWithoutSpaces.Length % 2 == 0)
+            {
+                 headOfString = inputStringWithoutSpaces.Substring(0, _inputString.Length / 2);
+                 tailOfString = inputStringWithoutSpaces.Substring(_inputString.Length / 2, _inputString.Length - _inputString.Length / 2);
+            }
+            else
+            {
+                 headOfString = inputStringWithoutSpaces.Substring(0, _inputString.Length / 2);
+                 tailOfString = inputStringWithoutSpaces.Remove(0, headOfString.Length + 1);
+            }
+            char[] arr = tailOfString.ToCharArray();
+            Array.Reverse(arr);
+            tailOfString =  new string(arr);
+            if (tailOfString.Equals(headOfString))
                 return true;
             else
                 return false;
