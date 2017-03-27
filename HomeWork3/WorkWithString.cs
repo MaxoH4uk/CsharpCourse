@@ -18,16 +18,16 @@ namespace HomeWork3
             inputStringWithoutSpaces = inputStringWithoutSpaces.Replace(" ", string.Empty);
             if (inputStringWithoutSpaces.Length % 2 == 0)
             {
-                 headOfString = inputStringWithoutSpaces.Substring(0, inputStringWithoutSpaces.Length / 2);
-                 tailOfString = inputStringWithoutSpaces.Remove(0, headOfString.Length);
+                headOfString = inputStringWithoutSpaces.Substring(0, inputStringWithoutSpaces.Length / 2);
+                tailOfString = inputStringWithoutSpaces.Remove(0, headOfString.Length);
             }
             else
             {
-                 headOfString = inputStringWithoutSpaces.Substring(0, inputStringWithoutSpaces.Length / 2);
-                 tailOfString = inputStringWithoutSpaces.Remove(0, headOfString.Length + 1);
+                headOfString = inputStringWithoutSpaces.Substring(0, inputStringWithoutSpaces.Length / 2);
+                tailOfString = inputStringWithoutSpaces.Remove(0, headOfString.Length + 1);
             }
-            tailOfString = returnReverseString(tailOfString);            
-            if (tailOfString.Equals(headOfString))
+            tailOfString = returnReverseString(tailOfString);
+            if (tailOfString.ToUpper().Equals(headOfString.ToUpper()))
                 return true;
             else
                 return false;
