@@ -15,15 +15,15 @@ namespace HomeWork3
             string headOfString;
             string tailOfString;
             string inputStringWithoutSpaces = removeSpacesFromString(_inputString);
-            inputStringWithoutSpaces = _inputString.Replace(" ", string.Empty);
+            inputStringWithoutSpaces = inputStringWithoutSpaces.Replace(" ", string.Empty);
             if (inputStringWithoutSpaces.Length % 2 == 0)
             {
-                 headOfString = inputStringWithoutSpaces.Substring(0, _inputString.Length / 2);
+                 headOfString = inputStringWithoutSpaces.Substring(0, inputStringWithoutSpaces.Length / 2);
                  tailOfString = inputStringWithoutSpaces.Remove(0, headOfString.Length);
             }
             else
             {
-                 headOfString = inputStringWithoutSpaces.Substring(0, (_inputString.Length / 2) - 1);
+                 headOfString = inputStringWithoutSpaces.Substring(0, inputStringWithoutSpaces.Length / 2);
                  tailOfString = inputStringWithoutSpaces.Remove(0, headOfString.Length + 1);
             }
             tailOfString = returnReverseString(tailOfString);            
