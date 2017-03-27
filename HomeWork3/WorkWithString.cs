@@ -43,7 +43,7 @@ namespace HomeWork3
         public int countsHowManyWordsPerLine()
         {
             string inputStringWithoutSpaces = removeSpacesFromString(_inputString);
-            string[] textArray = _inputString.Split(new char[] { ' ' });
+            string[] textArray = inputStringWithoutSpaces.Split(new char[] { ' ' });
             return textArray.Length;
         }
 
