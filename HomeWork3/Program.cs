@@ -7,18 +7,28 @@ namespace HomeWork3
     {
         static void Main(string[] args)
         {
-            Console.Write("Введите строку: ");
-            string inputString = Console.ReadLine();
-            WorkWithString workWithOneString = new WorkWithString(inputString);
-            if (workWithOneString.isPolindrom())
+            do
             {
-                Console.WriteLine("Входная строка - палиндром");
+                Console.Clear();
+                Console.Write("Введите строку: ");
+                string inputString = Console.ReadLine();
+                if (String.IsNullOrWhiteSpace(inputString))
+                {
+                    Console.WriteLine("Вы ввели пустую строку. Попробуйте еще раз");
+                    continue;
+                }
+                WorkWithString workWithOneString = new WorkWithString(inputString);
+                if (workWithOneString.isPolindrom())
+                {
+                    Console.WriteLine("Входная строка - палиндром");
+                }
+                else
+                    Console.WriteLine("Входная строка - не палиндром");
+                Console.WriteLine($"Перевернутая строка: {workWithOneString.returnReverseString()}");
+                Console.WriteLine($"Количество слов в строке равно: {workWithOneString.countsHowManyWordsPerLine()}");
+                Console.WriteLine("\nДля выхода из программы нажмите Esc\nДля повторного запуска программы нажмите любую кнопку\n");
             }
-            else
-                Console.WriteLine("Входная строка - не палиндром");
-            Console.WriteLine($"Перевернутая строка: {workWithOneString.returnReverseString()}");
-            Console.WriteLine($"Количество слов в строке равно: {workWithOneString.countsHowManyWordsPerLine()}");
-            Console.Read();
-        }        
+            while ((Console.ReadKey(true).Key != ConsoleKey.Escape));
+        }
     }
 }
