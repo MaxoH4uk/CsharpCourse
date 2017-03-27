@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{303B426D-669D-4827-8504-728F642B843A}</ProjectGuid>
+    <ProjectGuid>{6DDF6DA8-8AA2-433D-98B5-09F42349D6BA}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Lesson1</RootNamespace>
-    <AssemblyName>Lesson1</AssemblyName>
+    <RootNamespace>Lesson2</RootNamespace>
+    <AssemblyName>Lesson2</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{EEDBF5AD-D2A9-400C-815B-4239ED8460BF}</Project>
+      <Project>{eedbf5ad-d2a9-400c-815b-4239ed8460bf}</Project>
       <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>

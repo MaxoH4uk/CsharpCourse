@@ -8,14 +8,7 @@ namespace HomeWork2
         {
             Console.Write("Введите целое число: ");
             string numberAsString = Console.ReadLine();
-
-            if (uint.TryParse(numberAsString, out number))
-            {
-                return true;
-            }
-
-            else
-                return false;
+            return uint.TryParse(numberAsString, out number);           
         }
 
         static int[] SortArrayViaBubblesAlgorithm(int[] arrayOfRandomNumbers)
@@ -42,37 +35,31 @@ namespace HomeWork2
             {
                 Console.Clear();
                 uint number;
-
-                if (TryEnterIntNumberFromConsole(out number))
-                {
-                    int[] arrayOfRandomNumbers = new int[number];
-                    Random rnd = new Random();
-
-                    Console.WriteLine("\nМассив случайных чисел:");
-
-                    for (int i = 0; i < number; i++)
-                    {
-                        arrayOfRandomNumbers[i] = rnd.Next(-1000, 1000);
-                        Console.WriteLine($"{i + 1}-е число: {arrayOfRandomNumbers[i]} ");
-                    }
-
-                    Console.WriteLine("\nОтсортированный массив:");
-
-                    SortArrayViaBubblesAlgorithm(arrayOfRandomNumbers);
-
-                    for (int i = 0; i < arrayOfRandomNumbers.Length; i++)
-                    {
-                        Console.WriteLine($"{i + 1}-е число {arrayOfRandomNumbers[i]} ");
-                    }
-
-                    Console.WriteLine("\nДля выхода из программы нажмите Esc\nДля повторного запуска программы нажмите любую кнопку\n");
-                }
-
-                else
+                if (!TryEnterIntNumberFromConsole(out number))
                 {
                     Console.WriteLine("Ошибка! Вы не ввели целое число");
-                    Console.ReadKey();
-                }                
+                    continue;
+                }
+
+                int[] arrayOfRandomNumbers = new int[number];
+                Random rnd = new Random();
+                Console.WriteLine("\nМассив случайных чисел:");
+
+                for (int i = 0; i < number; i++)
+                {
+                    arrayOfRandomNumbers[i] = rnd.Next(-1000, 1000);
+                    Console.WriteLine($"{i + 1}-е число: {arrayOfRandomNumbers[i]} ");
+                }
+
+                Console.WriteLine("\nОтсортированный массив:");
+                SortArrayViaBubblesAlgorithm(arrayOfRandomNumbers);
+
+                for (int i = 0; i < arrayOfRandomNumbers.Length; i++)
+                {
+                    Console.WriteLine($"{i + 1}-е число {arrayOfRandomNumbers[i]} ");
+                }
+
+                Console.WriteLine("\nДля выхода из программы нажмите Esc\nДля повторного запуска программы нажмите любую кнопку\n");
             }
             while ((Console.ReadKey(true).Key != ConsoleKey.Escape));
         }
