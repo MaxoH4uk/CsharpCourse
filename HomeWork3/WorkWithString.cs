@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HomeWork3
 {
@@ -18,40 +14,45 @@ namespace HomeWork3
         {
             string headOfString;
             string tailOfString;
-            string inputStringWithoutSpaces = _inputString.Replace(" ", string.Empty);
+            string inputStringWithoutSpaces = removeSpacesFromString(_inputString);
+            inputStringWithoutSpaces = _inputString.Replace(" ", string.Empty);
             if (inputStringWithoutSpaces.Length % 2 == 0)
             {
                  headOfString = inputStringWithoutSpaces.Substring(0, _inputString.Length / 2);
-                 tailOfString = inputStringWithoutSpaces.Substring(_inputString.Length / 2, _inputString.Length - _inputString.Length / 2);
+                 tailOfString = inputStringWithoutSpaces.Remove(0, headOfString.Length);
             }
             else
             {
-                 headOfString = inputStringWithoutSpaces.Substring(0, _inputString.Length / 2);
+                 headOfString = inputStringWithoutSpaces.Substring(0, (_inputString.Length / 2) - 1);
                  tailOfString = inputStringWithoutSpaces.Remove(0, headOfString.Length + 1);
             }
-            char[] arr = tailOfString.ToCharArray();
-            Array.Reverse(arr);
-            tailOfString =  new string(arr);
+            tailOfString = returnReverseString(tailOfString);            
             if (tailOfString.Equals(headOfString))
                 return true;
             else
                 return false;
         }
 
-        public string returnReverseString()
+        public string returnReverseString(string inputString)
         {
-            char[] arr = _inputString.ToCharArray();
+            char[] arr = inputString.ToCharArray();
             Array.Reverse(arr);
             return new string(arr);
         }
 
         public int countsHowManyWordsPerLine()
         {
-            while (_inputString.Contains("  ") || _inputString.Contains(".") || _inputString.Contains(","))
-                _inputString = _inputString.Replace(",", " ").Replace(".", " ").Replace("  ", " ");
-            _inputString = _inputString.Trim();
+            string inputStringWithoutSpaces = removeSpacesFromString(_inputString);
             string[] textArray = _inputString.Split(new char[] { ' ' });
             return textArray.Length;
+        }
+
+        public string removeSpacesFromString(string inputString)
+        {
+            while (inputString.Contains("  ") || inputString.Contains(".") || inputString.Contains(","))
+                inputString = inputString.Replace(",", " ").Replace(".", " ").Replace("  ", " ");
+            inputString = inputString.Trim();
+            return inputString;
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace HomeWork3
 {
@@ -24,7 +23,7 @@ namespace HomeWork3
                 }
                 else
                     Console.WriteLine("Входная строка - не палиндром");
-                Console.WriteLine($"Перевернутая строка: {workWithOneString.returnReverseString()}");
+                Console.WriteLine($"Перевернутая строка: {workWithOneString.returnReverseString(inputString)}");
                 Console.WriteLine($"Количество слов в строке равно: {workWithOneString.countsHowManyWordsPerLine()}");
                 Console.WriteLine("\nДля выхода из программы нажмите Esc\nДля повторного запуска программы нажмите любую кнопку\n");
             }
