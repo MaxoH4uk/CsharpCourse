@@ -14,10 +14,10 @@ namespace HomeWork3
         {
             string headOfString;
             string tailOfString;
-            string inputStringWithoutSpaces = removeSpacesFromString(_inputString).Replace(" ", string.Empty); //убираем пробелы и знаки препинания из строки
-            if (inputStringWithoutSpaces.Length % 2 == 0)                                                      //делим строку пополам
+            string inputStringWithoutSpaces = _inputString.Replace(" ", string.Empty).Replace(".", string.Empty).Replace(",", string.Empty); //убираем пробелы и знаки препинания из строки
+            if (inputStringWithoutSpaces.Length % 2 == 0)                                                                                    //делим строку пополам
             {
-                headOfString = inputStringWithoutSpaces.Substring(0, inputStringWithoutSpaces.Length / 2); 
+                headOfString = inputStringWithoutSpaces.Substring(0, inputStringWithoutSpaces.Length / 2);
                 tailOfString = inputStringWithoutSpaces.Remove(0, headOfString.Length);
             }
             else
@@ -41,17 +41,12 @@ namespace HomeWork3
 
         public int countsHowManyWordsPerLine()
         {
-            string inputStringWithoutSpaces = removeSpacesFromString(_inputString);
+            string inputStringWithoutSpaces = _inputString;
+            while (inputStringWithoutSpaces.Contains("  ") || inputStringWithoutSpaces.Contains(".") || inputStringWithoutSpaces.Contains(",")) //заменяем в строке все двойные пробелы 
+                inputStringWithoutSpaces = inputStringWithoutSpaces.Replace(",", " ").Replace(".", " ").Replace("  ", " ");                     //и знаки препинания на одинарные пробелы
+            inputStringWithoutSpaces = inputStringWithoutSpaces.Trim();
             string[] textArray = inputStringWithoutSpaces.Split(new char[] { ' ' });
             return textArray.Length;
-        }
-
-        public string removeSpacesFromString(string inputString)
-        {
-            while (inputString.Contains("  ") || inputString.Contains(".") || inputString.Contains(",")) //заменяем в строке все двойные пробелы 
-                inputString = inputString.Replace(",", " ").Replace(".", " ").Replace("  ", " ");        //и знаки препинания на одинарные пробелы
-            inputString = inputString.Trim();                                                            //убираем пробелы из начала и конца строки
-            return inputString;
         }
     }
 }
