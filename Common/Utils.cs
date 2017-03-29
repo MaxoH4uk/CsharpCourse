@@ -18,7 +18,6 @@ namespace Common
                 Console.Write("Ввели не число");
                 return false;
             }
-
             return true;
         }
     }

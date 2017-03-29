@@ -19,7 +19,6 @@ namespace HomeWork2
                 int[] arrayOfRandomNumbers = new int[number];
                 Random rnd = new Random();
                 Console.WriteLine("\nМассив случайных чисел:");
-
                 for (int i = 0; i < number; i++)
                 {
                     arrayOfRandomNumbers[i] = rnd.Next(-1000, 1000);
@@ -28,7 +27,6 @@ namespace HomeWork2
 
                 Console.WriteLine("\nОтсортированный массив:");
                 SortArrayViaBubblesAlgorithm(arrayOfRandomNumbers);
-
                 printArray(arrayOfRandomNumbers);
                 Console.WriteLine("\nДля выхода из программы нажмите Esc\nДля повторного запуска программы нажмите любую кнопку\n");
             }
@@ -56,7 +54,6 @@ namespace HomeWork2
                     }
                 }
             }
-
             return arrayOfRandomNumbers;
         }
 

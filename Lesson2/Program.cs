@@ -20,7 +20,6 @@ namespace Lesson2
             {
                 array[i] = random.NextDouble() * 100;
             }
-
             PrintDoubleArray(array);
             Console.WriteLine();
 
@@ -36,10 +35,8 @@ namespace Lesson2
                     }
                 }
             }
-
             PrintDoubleArray(array);
             Console.WriteLine();
-
             Console.Read();
         }
 
