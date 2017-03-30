@@ -17,14 +17,14 @@ namespace HomeWork3
                     continue;
                 }
                 WorkWithString workWithOneString = new WorkWithString(inputString);
-                if (workWithOneString.isPolindrom())
+                if (workWithOneString.IsPolindrom())
                 {
                     Console.WriteLine("Входная строка - палиндром");
                 }
                 else
                     Console.WriteLine("Входная строка - не палиндром");
-                Console.WriteLine($"Перевернутая строка: {workWithOneString.returnReverseString(inputString)}");
-                Console.WriteLine($"Количество слов в строке равно: {workWithOneString.countsHowManyWordsPerLine()}");
+                Console.WriteLine($"Перевернутая строка: {workWithOneString.ReturnReverseString(inputString)}");
+                Console.WriteLine($"Количество слов в строке равно: {workWithOneString.CountsHowManyWordsPerLine()}");
                 Console.WriteLine("\nДля выхода из программы нажмите Esc\nДля повторного запуска программы нажмите любую кнопку\n");
             }
             while ((Console.ReadKey(true).Key != ConsoleKey.Escape));

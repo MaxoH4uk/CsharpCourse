@@ -10,7 +10,7 @@ namespace HomeWork3
             _inputString = inputString;
         }
 
-        public bool isPolindrom()
+        public bool IsPolindrom()
         {
             string headOfString;
             string tailOfString;
@@ -25,21 +25,21 @@ namespace HomeWork3
                 headOfString = inputStringWithoutSpaces.Substring(0, inputStringWithoutSpaces.Length / 2);
                 tailOfString = inputStringWithoutSpaces.Remove(0, headOfString.Length + 1);
             }
-            tailOfString = returnReverseString(tailOfString);            //переворачиваем вторую половину входной строки
+            tailOfString = ReturnReverseString(tailOfString);            //переворачиваем вторую половину входной строки
             if (tailOfString.ToUpper().Equals(headOfString.ToUpper()))   //сравниваем две части строки
                 return true;
             else
                 return false;
         }
 
-        public string returnReverseString(string inputString)
+        public string ReturnReverseString(string inputString)
         {
             char[] arr = inputString.ToCharArray();
             Array.Reverse(arr);
             return new string(arr);
         }
 
-        public int countsHowManyWordsPerLine()
+        public int CountsHowManyWordsPerLine()
         {
             string inputStringWithoutSpaces = _inputString;
             while (inputStringWithoutSpaces.Contains("  ") || inputStringWithoutSpaces.Contains(".") || inputStringWithoutSpaces.Contains(",")) //заменяем в строке все двойные пробелы 
