@@ -7,7 +7,7 @@ namespace HomeWork4
         static void Main(string[] args)
         {
             Rectangle rectangle = new Rectangle(5, 10);
-            Console.WriteLine($"Название фигуры: {rectangle.GetName = "Прямоугольник"}");
+            Console.WriteLine($"Название фигуры: {rectangle.GetName="Прямоугольник"}");
             Console.WriteLine("Площадь фигуры: {0:#.##}", rectangle.GetArea());
             Console.WriteLine("Периметр фигуры: {0:#.##}", rectangle.GetPerimeter());            
             Console.WriteLine();

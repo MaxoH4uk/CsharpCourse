@@ -26,15 +26,12 @@ namespace HomeWork4
         {
             set
             {
-                if (!String.IsNullOrEmpty(value))
-                    _name = value;
-                else
-                    Console.WriteLine("Ошибка в названии фигуры");
+                _name = value;
             }
 
             get
             {
-                return _name;
+                return String.IsNullOrEmpty(_name) ? "Ошибка в названии фигуры" : _name;
             }
         }
     }
