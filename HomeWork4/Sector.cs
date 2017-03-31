@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HomeWork4
 {
@@ -10,9 +6,8 @@ namespace HomeWork4
     {
         private double _radius;
         private double _arcLength;
-        public Sector(string name, uint radius, uint arcLength)
+        public Sector(uint radius, uint arcLength)
         {
-            _name = name;
             _radius = radius;
             _arcLength = arcLength;
         }
@@ -27,9 +22,20 @@ namespace HomeWork4
             return _arcLength + 2 * _radius;
         }
 
-        public override string GetName()
+        new public string GetName
         {
-            return _name;
+            set
+            {
+                if (!String.IsNullOrEmpty(value))
+                    _name = value;
+                else
+                    Console.WriteLine("Ошибка в названии фигуры");
+            }
+
+            get
+            {
+                return _name;
+            }
         }
     }
 }

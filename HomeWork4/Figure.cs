@@ -1,17 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HomeWork4
 {
     class Figure
     {
         protected string _name;
-        public Figure()
+        protected string GetName
         {
-            _name = "Фигура";
+            set
+            {
+                if (!String.IsNullOrEmpty(value))
+                    _name = value;
+                else
+                    Console.WriteLine("Ошибка в названии фигуры");
+            }
+
+            get
+            {
+                return _name;
+            }
         }
 
         public virtual double GetArea()
@@ -22,10 +29,6 @@ namespace HomeWork4
         public virtual double GetPerimeter()
         {
             return 0;
-        }
-        public virtual string GetName()
-        {
-            return "Это родительский класс Фигура";
         }
     }
 }

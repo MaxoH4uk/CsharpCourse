@@ -5,9 +5,8 @@ namespace HomeWork4
     class Circle : Figure
     {
         private double _radius;
-        public Circle(string name, uint radius)
+        public Circle(uint radius)
         {
-            _name = name;
             _radius = radius;
         }
 
@@ -21,9 +20,20 @@ namespace HomeWork4
             return 2 * Math.PI * _radius;
         }
 
-        public override string GetName()
+        new public string GetName
         {
-            return _name;
+            set
+            {
+                if (!String.IsNullOrEmpty(value))
+                    _name = value;
+                else
+                    Console.WriteLine("Ошибка в названии фигуры");
+            }
+
+            get
+            {
+                return _name;
+            }
         }
     }
 }

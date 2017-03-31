@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HomeWork4
 {
@@ -12,9 +8,8 @@ namespace HomeWork4
         private double _b;
         private double _c;
         private double _h;
-        public Triangle(string name, params uint[] hands)
+        public Triangle(params uint[] hands)
         {
-            _name = name;
             _a = hands[0];
             _b = hands[1];
             _c = hands[2];
@@ -31,9 +26,20 @@ namespace HomeWork4
             return _a + _b + _c;
         }
 
-        public override string GetName()
+        new public string GetName
         {
-            return _name;
+            set
+            {
+                if (!String.IsNullOrEmpty(value))
+                    _name = value;
+                else
+                    Console.WriteLine("Ошибка в названии фигуры");
+            }
+
+            get
+            {
+                return _name;
+            }
         }
     }
 }

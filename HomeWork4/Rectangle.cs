@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HomeWork4
 {
@@ -10,9 +6,8 @@ namespace HomeWork4
     {
         private double _a;
         private double _b;
-        public Rectangle(string name, params uint[] hands)
+        public Rectangle(params uint[] hands)
         {
-            _name = name;
             _a = hands[0];
             _b = hands[1];
         }
@@ -27,9 +22,20 @@ namespace HomeWork4
             return 2 * (_a + _b);
         }
 
-        public override string GetName()
+        new public string GetName
         {
-            return _name;
+            set
+            {
+                if (!String.IsNullOrEmpty(value))
+                    _name = value;
+                else
+                    Console.WriteLine("Ошибка в названии фигуры");
+            }
+
+            get
+            {
+                return _name;
+            }            
         }
     }
 }
