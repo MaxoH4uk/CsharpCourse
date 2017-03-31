@@ -6,7 +6,7 @@ namespace HomeWork4
     {
         private double _radius;
         private double _arcLength;
-        public Sector(uint radius, uint arcLength)
+        public Sector(string name, uint radius, uint arcLength) : base(name)
         {
             _radius = radius;
             _arcLength = arcLength;
@@ -20,19 +20,6 @@ namespace HomeWork4
         public override double GetPerimeter()
         {
             return _arcLength + 2 * _radius;
-        }
-
-        new public string GetName
-        {
-            set
-            {
-                _name = value;
-            }
-
-            get
-            {
-                return String.IsNullOrEmpty(_name) ? "Ошибка в названии фигуры" : _name;
-            }
         }
     }
 }

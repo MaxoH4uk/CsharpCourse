@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HomeWork4
+﻿namespace HomeWork4
 {
     class Triangle : Figure
     {
@@ -8,7 +6,7 @@ namespace HomeWork4
         private double _b;
         private double _c;
         private double _h;
-        public Triangle(params uint[] hands)
+        public Triangle(string name, params uint[] hands) : base(name)
         {
             _a = hands[0];
             _b = hands[1];
@@ -24,19 +22,6 @@ namespace HomeWork4
         public override double GetPerimeter()
         {
             return _a + _b + _c;
-        }
-
-        new public string GetName
-        {
-            set
-            {
-                _name = value;
-            }
-
-            get
-            {
-                return String.IsNullOrEmpty(_name) ? "Ошибка в названии фигуры" : _name;
-            }
-        }
+        }        
     }
 }

@@ -6,7 +6,7 @@ namespace HomeWork4
     {
         private double _a;
         private double _b;
-        public Rectangle(params uint[] hands)
+        public Rectangle(string name, params uint[] hands) : base(name)
         {
             _a = hands[0];
             _b = hands[1];
@@ -20,19 +20,6 @@ namespace HomeWork4
         public override double GetPerimeter()
         {
             return 2 * (_a + _b);
-        }
-
-        new public string GetName
-        {
-            set
-            {
-                _name = value;
-            }
-
-            get
-            {
-                return String.IsNullOrEmpty(_name) ? "Ошибка в названии фигуры" : _name;
-            }
-        }
+        }        
     }
 }

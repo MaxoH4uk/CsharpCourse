@@ -1,21 +1,11 @@
-﻿using System;
-
-namespace HomeWork4
+﻿namespace HomeWork4
 {
     class Figure
     {
         protected string _name;
-        protected string GetName
+        public Figure(string name)
         {
-            set
-            {
-                _name = value;
-            }
-
-            get
-            {
-                return String.IsNullOrEmpty(_name) ? "Ошибка в названии фигуры" : _name;
-            }
+            _name = name;
         }
 
         public virtual double GetArea()
@@ -26,6 +16,11 @@ namespace HomeWork4
         public virtual double GetPerimeter()
         {
             return 0;
+        }
+
+        public virtual string GetName()
+        {
+            return _name;
         }
     }
 }
