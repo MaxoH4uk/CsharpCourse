@@ -3,5 +3,6 @@
     interface IRotatable
     {
         void Move(string model);
+        
     }
 }
