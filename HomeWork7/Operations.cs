@@ -5,7 +5,7 @@ namespace HomeWork7
 {
     public class Operations
     {
-       public void CreateAccount(Employee employee)
+       public void CreateAccount(Employee employee, uint customerId)
         {
             if (employee.AccessLevel < 1)
             {
@@ -15,7 +15,7 @@ namespace HomeWork7
             }
         }
 
-        public void CloseAccount(Employee employee)
+        public void CloseAccount(Employee employee, uint customerId)
         {
             if (employee.AccessLevel < 1)
             {

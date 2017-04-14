@@ -15,6 +15,13 @@ namespace HomeWork7
 
         public void WithdrawMoney(uint Sum)
         {
+            if (Balance < Sum)
+            {
+                Console.WriteLine("На счету недостаточно денег!");
+                Console.Read();
+                return;
+            }
+
             Balance -= Sum;
         }
 

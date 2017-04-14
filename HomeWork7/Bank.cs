@@ -11,31 +11,29 @@ namespace HomeWork7
 
         public void AcceptNewEmployees(string name, string surname, uint personnelNumber, uint accessLevel, double currentTime)
         {
-            if (IsOpenedBank(currentTime))
-            {
-                Employees.Add(new Employee(name, surname, personnelNumber, accessLevel));
-            }
-            else
+            if (!IsOpenedBank(currentTime))
             {
                 Console.WriteLine("Банк работает с 9.00 до 18.00. Обратитесь в это время!");
                 Console.Read();
                 return;
-            }                
+
+            }
+
+            Employees.Add(new Employee(name, surname, personnelNumber, accessLevel));
         }
 
-        public void AcceptCustomers(string name, string surname, double currentTime)
+        public void AcceptCustomers(string name, string surname, uint customerId, double currentTime)
         {
-            if (IsOpenedBank(currentTime))
-            {
-                customers.Add(new Customer(name, surname));
-            }
-            else
+            if (!IsOpenedBank(currentTime))
             {
                 Console.WriteLine("Банк работает с 9.00 до 18.00. Обратитесь в это время!");
                 Console.Read();
                 return;
+
             }
-        }        
+
+            customers.Add(new Customer(name, surname, customerId));
+        }
 
         public bool IsOpenedBank(double currentTime)
         {

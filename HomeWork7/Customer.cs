@@ -5,10 +5,12 @@ namespace HomeWork7
 {
     public class Customer : Human
     {
-        public Customer(string name, string surname) 
+        public uint CustomerId { get; set; }
+
+        public Customer(string name, string surname, uint customerId) 
             : base(name, surname)
         {
-            
+            this.CustomerId = customerId;   
         }
     }
 }
