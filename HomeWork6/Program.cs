@@ -6,95 +6,93 @@ namespace HomeWork6
     {
         static void Main(string[] args)
         {
-            int[,] firstMatrixSize = new int[1, 1];
-            int[,] secondMatrixSize = new int[1, 1];
-            int numberForAdditionWithMatrices;
-            int numberForMultiplicationByMatrices;
+            uint matrixRowsCount;
+            uint matrixColumnsCount;
 
-            Console.Write("Введите количество строк и столбцов первой матрицы: ");
-            string firstMatrixSizeToString = Console.ReadLine();
-
-            Console.Write("Введите количество строк и столбцов второй матрицы : ");
-            string secondMatrixSizeToString = Console.ReadLine();
-
-            Console.Write("Введите число для сложения с матрицами: ");
-            if (!Matrix.TryEnterNumberFromConsole(out numberForAdditionWithMatrices))
+            Console.Write("Введите количество строк матрицы: ");
+            if (!TryEnterNumberFromConsole(out matrixRowsCount))
             {
                 Console.Read();
                 return;
             }
 
-            Console.Write("Введите число для умножения на матрицы: ");
-            if (!Matrix.TryEnterNumberFromConsole(out numberForMultiplicationByMatrices))
+            Console.Write("Введите количество столбцов матрицы: ");
+            if (!TryEnterNumberFromConsole(out matrixColumnsCount))
             {
                 Console.Read();
                 return;
             }
             Console.WriteLine();
 
-            try
-            {
-                firstMatrixSize = Matrix.GetSizeOfMatrix(firstMatrixSizeToString);
-                secondMatrixSize = Matrix.GetSizeOfMatrix(secondMatrixSizeToString);
-            }
-            catch
-            {
-                Console.WriteLine("Нужно вводить количество строк и количество столбцов!");
-                Console.Read();
-                return;
-            }
-
-            Console.WriteLine("Первая матрица: ");
-            int[,] firstMatrix = Matrix.CreateMatrix(firstMatrixSize);
-            Matrix.PrintMatrixToConsole(firstMatrix);
+            Console.WriteLine("Матрица А: ");
+            Matrix A = new Matrix(matrixRowsCount, matrixColumnsCount);
+            PrintMatrixToConsole(A);
             Console.WriteLine();
 
-            Console.WriteLine("Вторая матрица: ");
-            int[,] secondMatrix = Matrix.CreateMatrix(secondMatrixSize);
-            Matrix.PrintMatrixToConsole(secondMatrix);
+            Console.WriteLine("Матрица B: ");
+            Matrix B = new Matrix(matrixRowsCount, matrixColumnsCount);
+            PrintMatrixToConsole(B);
             Console.WriteLine();
 
-            Console.WriteLine("Результат сложения матриц: ");
-            Matrix.PrintSumOfMatricesToConsole(firstMatrix, secondMatrix);
+            Console.WriteLine("A + B: ");
+            PrintMatrixToConsole(A.GetSumOfMatrices(B));
             Console.WriteLine();
 
-            Console.WriteLine("Резльтат сожения первой матрицы с числом: ");
-            Matrix.PrintTheSumOfNumberWithMatrixToConsole(firstMatrix, numberForAdditionWithMatrices);
+            Console.WriteLine("A + 5: ");
+            PrintMatrixToConsole(A.GetSumOfMatrixAndNumber(5));
             Console.WriteLine();
 
-            Console.WriteLine("Резльтат сложения второй матрицы с числом: ");
-            Matrix.PrintTheSumOfNumberWithMatrixToConsole(secondMatrix, numberForAdditionWithMatrices);
+            Console.WriteLine("A * B: ");
+            PrintMatrixToConsole(A.GetMatrixProduct(B));
             Console.WriteLine();
 
-            Console.WriteLine("Резльтат произведения матриц: ");
-            Matrix.PrintMatrixProductToConsole(firstMatrix, secondMatrix);
+            Console.WriteLine("B * 5: ");
+            PrintMatrixToConsole(B.GetProductOfNumberWithMatrix(5));
             Console.WriteLine();
 
-            Console.WriteLine("Резльтат умножения первой матрицы на число: ");
-            Matrix.PrintTheProductOfNumberWithMatrixToConsole(firstMatrix, numberForAdditionWithMatrices);
+            Console.WriteLine("Транспонированная матрица А: ");
+            PrintMatrixToConsole(A.GetTransposedMatrix());
             Console.WriteLine();
 
-            Console.WriteLine("Резльтат умножения второй матрицы на число: ");
-            Matrix.PrintTheProductOfNumberWithMatrixToConsole(secondMatrix, numberForAdditionWithMatrices);
+            ToeplitzMatrix tm = new ToeplitzMatrix(matrixRowsCount, matrixColumnsCount);
+            Console.WriteLine(tm.GetItem(2, 2));
+
+            Console.Write("Определитель матрицы B: ");
+            Console.WriteLine(B.GetDeterminantOfMatrix());
             Console.WriteLine();
 
-            Console.WriteLine("Резльтат транспонирования первой матрицы: ");
-            Matrix.PrintTheTransposedMatrixToConsole(firstMatrix);
-            Console.WriteLine();
-
-            Console.WriteLine("Резльтат транспонирования второй матрицы: ");
-            Matrix.PrintTheTransposedMatrixToConsole(secondMatrix);
-            Console.WriteLine();
-
-            Console.Write("Определитель первой матрицы: ");
-            Console.WriteLine(Matrix.GetDeterminantOfMatrix(firstMatrix));
-            Console.WriteLine();
-
-            Console.Write("Определитель второй матрицы: ");
-            Console.WriteLine(Matrix.GetDeterminantOfMatrix(secondMatrix));
-            Console.WriteLine();
+            /*Console.WriteLine("Теплицева матрица: ");
+            Matrix toeplitz = new Matrix(matrixRowsCount, matrixColumnsCount);
+            toeplitzMatrix = new int[matrixRowsCount, matrixColumnsCount];
+            toeplitzMatrix = toeplitz.CreateMatrix();
+            PrintMatrixToConsole(secondMatrix);
+            Console.WriteLine();*/
 
             Console.Read();
+        }
+
+        public static bool TryEnterNumberFromConsole(out uint number)
+        {
+            string numberAsString = Console.ReadLine();
+
+            if (!(uint.TryParse(numberAsString, out number)))
+            {
+                Console.Write("Ввели не число");
+                return false;
+            }
+            return true;
+        }
+
+        public static void PrintMatrixToConsole(Matrix matrix)
+        {
+            for (uint i = 0; i < matrix.MatrixRowsCount; i++)
+            {
+                for (uint j = 0; j < matrix.MatrixColumnsCount; j++)
+                {
+                    Console.Write(matrix.GetItem(i, j) + "\t");
+                }
+                Console.WriteLine();
+            }
         }
     }
 }

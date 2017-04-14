@@ -1,169 +1,158 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace HomeWork6
 {
-    public class Matrix
+    class Matrix
     {
-        private static List<uint> matrixSize;
-        private static List<int> transposedMatrix;
+        public uint MatrixRowsCount { get; private set; }
+        public uint MatrixColumnsCount { get; private set; }
 
-        public static bool TryEnterNumberFromConsole(out int number)
+        private int[,] data;
+
+        public Matrix(uint matrixRowsCount, uint matrixColumnsCount)
         {
-            string numberAsString = Console.ReadLine();
-
-            if (!(int.TryParse(numberAsString, out number)))
-            {
-                Console.Write("Ввели не число");
-                return false;
-            }
-            return true;
+            MatrixRowsCount = matrixRowsCount;
+            MatrixColumnsCount = matrixColumnsCount;
+            FillMatrix();
         }
 
-        public static int[,] GetSizeOfMatrix(string matrixSizeToString)
+        public virtual int GetItem(uint x, uint y)
         {
-            matrixSize = new List<uint>();
-            for (int i = 0; i < matrixSizeToString.Length; i++)
+            if (x < MatrixRowsCount && y < MatrixColumnsCount)
             {
-                if (!Char.IsDigit(matrixSizeToString[i]))
-                {
-                    continue;
-                }
-                else
-                    matrixSize.Add(Convert.ToUInt32(matrixSizeToString[i].ToString()));
+                return data[x, y];
             }
-            int[,] inputMatrix = new int[matrixSize[0], matrixSize[1]];
-            return inputMatrix;
+
+            else
+                return 0;
         }
 
-        public static void PrintMatrixToConsole(int[,] inputMatrix)
+        public virtual void SetItem(uint x, uint y, int value)
         {
-            for (int i = 0; i < inputMatrix.GetLength(0); i++)
+            if (x < MatrixRowsCount && y < MatrixColumnsCount)
             {
-                for (int j = 0; j < inputMatrix.GetLength(1); j++)
-                {
-                    Console.Write(inputMatrix[i, j] + "\t");
-                }
-                Console.WriteLine();
+                data[x, y] = value;
             }
         }
 
-        public static int[,] CreateMatrix(int[,] inputMatrix)
+        protected virtual void FillMatrix()
         {
+            data = new int[MatrixRowsCount,MatrixColumnsCount];
             Random rnd = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
-            for (int i = 0; i < matrixSize[0]; i++)
+
+            for (int i = 0; i < MatrixRowsCount; i++)
             {
-                for (int j = 0; j < matrixSize[1]; j++)
+                for (int j = 0; j < MatrixColumnsCount; j++)
                 {
-                    inputMatrix[i, j] = rnd.Next(-10, 10);
+                    data[i, j] = rnd.Next(-10, 10);
                 }
             }
-            return inputMatrix;
         }
 
-        public static void PrintSumOfMatricesToConsole(int[,] firstMatrix, int[,] secondMatrix)
+        public virtual Matrix GetSumOfMatrices(Matrix secondMatrix)
         {
-            if (firstMatrix.GetLength(0) == secondMatrix.GetLength(0) && firstMatrix.GetLength(1) == secondMatrix.GetLength(1))
+            var sumOfMatrices = new Matrix(MatrixRowsCount, MatrixColumnsCount);
+
+            for (uint i = 0; i < MatrixRowsCount; i++)
             {
-                for (int i = 0; i < firstMatrix.GetLength(0); i++)
+                for (uint j = 0; j < MatrixColumnsCount; j++)
                 {
-                    for (int j = 0; j < firstMatrix.GetLength(1); j++)
+                    sumOfMatrices.SetItem(i, j, this.GetItem(i, j) + secondMatrix.GetItem(i, j));
+                }
+            }
+
+            return sumOfMatrices;
+        }
+
+        public virtual Matrix GetSumOfMatrixAndNumber(int number)
+        {
+            var sumOfMatrixAndNumber = new Matrix(MatrixRowsCount, MatrixColumnsCount);
+
+            for (uint i = 0; i < MatrixRowsCount; i++)
+            {
+                for (uint j = 0; j < MatrixColumnsCount; j++)
+                {
+                    sumOfMatrixAndNumber.SetItem(i, j, this.GetItem(i, j) + number);
+                }
+            }
+
+            return sumOfMatrixAndNumber;
+        }
+
+        public virtual Matrix GetMatrixProduct(Matrix secondMatrix)
+        {
+            var c = new Matrix(MatrixRowsCount, MatrixColumnsCount);
+
+            for (uint i = 0; i < c.MatrixRowsCount; i++)
+            {
+                for (uint k = 0; k < c.MatrixColumnsCount; k++)
+                {
+                    for (uint j = 0; j < MatrixRowsCount; j++)
                     {
-                        Console.Write((firstMatrix[i, j] + secondMatrix[i, j]) + "\t");
+                        c.SetItem(i, k, this.GetItem(i, j) * secondMatrix.GetItem(j, k));
                     }
-                    Console.WriteLine();
                 }
             }
-            else
-                Console.WriteLine("Матрицы имеют разную размерность. Сложение невозможно");
+
+            return c;
         }
 
-        public static void PrintMatrixProductToConsole(int[,] firstMatrix, int[,] secondMatrix)
+        public virtual Matrix GetProductOfNumberWithMatrix(int inputNumber)
         {
-            if (firstMatrix.GetLength(1) == secondMatrix.GetLength(0))
+            var productOfNumberWithMatrix = new Matrix(MatrixRowsCount, MatrixColumnsCount);
+
+            for (uint i = 0; i < MatrixRowsCount; i++)
             {
-                int[,] c = new int[firstMatrix.GetLength(0), secondMatrix.GetLength(1)];
-                for (int i = 0; i < c.GetLength(0); i++)
+                for (uint j = 0; j < MatrixColumnsCount; j++)
                 {
-                    for (int k = 0; k < c.GetLength(1); k++)
-                    {
-                        for (int j = 0; j < firstMatrix.GetLength(0); j++)
-                        {
-                            c[i, k] += firstMatrix[i, j] * secondMatrix[j, k];
-                        }
-                        Console.Write(c[i, k] + "\t");
-                    }
-                    Console.WriteLine();
+                    productOfNumberWithMatrix.SetItem(i, j, this.GetItem(i, j) * inputNumber);
                 }
             }
-            else
-                Console.WriteLine("Число столбцов первой матрицы не равно числу строк второй. Умножение невозможно");
+
+            return productOfNumberWithMatrix;
         }
 
-        public static void PrintTheSumOfNumberWithMatrixToConsole(int[,] inputMatrix, int inputNumber)
+        public virtual Matrix GetTransposedMatrix()
         {
-            for (int i = 0; i < inputMatrix.GetLength(0); i++)
+            var transposedMatrix = new Matrix(MatrixRowsCount, MatrixColumnsCount);
+
+            for (uint j = 0; j < MatrixColumnsCount; j++)
             {
-                for (int j = 0; j < inputMatrix.GetLength(1); j++)
+                for (uint i = 0; i < MatrixRowsCount; i++)
                 {
-                    Console.Write(inputMatrix[i, j] + inputNumber + "\t");
+                    transposedMatrix.SetItem(j, i, this.GetItem(i, j));
                 }
-                Console.WriteLine();
             }
+
+            return transposedMatrix;
         }
 
-        public static void PrintTheProductOfNumberWithMatrixToConsole(int[,] inputMatrix, int inputNumber)
+        public virtual int GetDeterminantOfMatrix()
         {
-            for (int i = 0; i < inputMatrix.GetLength(0); i++)
+            if (this.MatrixColumnsCount == 2 && this.MatrixRowsCount == 2)
             {
-                for (int j = 0; j < inputMatrix.GetLength(1); j++)
-                {
-                    Console.Write(inputMatrix[i, j] * inputNumber + "\t");
-                }
-                Console.WriteLine();
-            }
-        }
-
-        public static void PrintTheTransposedMatrixToConsole(int[,] inputMatrix)
-        {
-            transposedMatrix = new List<int>();
-
-            for (int j = 0; j < inputMatrix.GetLength(1); j++)
-            {
-                for (int i = 0; i < inputMatrix.GetLength(0); i++)
-                {
-                    Console.Write(inputMatrix[i, j] + "\t");
-                }
-                Console.WriteLine();
-            }
-        }
-
-        public static int GetDeterminantOfMatrix(int[,] inputMatrix)
-        {
-            if (inputMatrix.Length == 4)
-            {
-                return inputMatrix[0, 0] * inputMatrix[1, 1] - inputMatrix[0, 1] * inputMatrix[1, 0];
+                return this.GetItem(0, 0) * this.GetItem(1, 1) - this.GetItem(0, 1) * this.GetItem(1, 0);
             }
 
             int sign = 1, determinant = 0;
-            for (int i = 0; i < inputMatrix.GetLength(1); i++)
+            for (uint i = 0; i < this.MatrixColumnsCount; i++)
             {
-                int[,] minor = GetMinor(inputMatrix, i);
-                determinant += sign * inputMatrix[0, i] * GetDeterminantOfMatrix(minor);
+                int[,] minor = GetMinor(i);
+                determinant += sign * this.GetItem(0, i) * GetDeterminantOfMatrix();
                 sign = -sign;
             }
             return determinant;
         }
 
-        private static int[,] GetMinor(int[,] inputMatrix, int n)
+        public virtual int[,] GetMinor(uint n)
         {
-            int[,] result = new int[inputMatrix.GetLength(0) - 1, inputMatrix.GetLength(0) - 1];
-            for (int i = 1; i < inputMatrix.GetLength(0); i++)
+            int[,] result = new int[this.MatrixRowsCount - 1, this.MatrixRowsCount - 1];
+            for (uint i = 1; i < this.MatrixRowsCount; i++)
             {
-                for (int j = 0; j < n; j++)
-                    result[i - 1, j] = inputMatrix[i, j];
-                for (int j = n + 1; j < inputMatrix.GetLength(0); j++)
-                    result[i - 1, j - 1] = inputMatrix[i, j];
+                for (uint j = 0; j < n; j++)
+                    result[i - 1, j] = this.GetItem(i, j);
+                for (uint j = n + 1; j < this.MatrixRowsCount; j++)
+                    result[i - 1, j - 1] = this.GetItem(i, j);
             }
             return result;
         }
