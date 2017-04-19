@@ -1,9 +1,8 @@
 ﻿namespace HomeWork5
 {
-    abstract class Detail
+    public abstract class Detail
     {
-        public abstract float Weight { get; set; }
-
+        public abstract int Weight { get; set; }
         public abstract string Name { get; set; }
     }
 }

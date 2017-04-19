@@ -1,39 +1,30 @@
-﻿namespace HomeWork5
+﻿using System;
+
+namespace HomeWork5
 {
-    class Door : Detail, IDoor
+    public class Door : Detail, IOpenable
     {
-        private uint _number;
-
-        public Door(uint number)
-        {
-            _number = number;
-        }
-
-        public void Open(string model)
-        {            
-            if (!Form1.isOpenedDoor[(int)(Number - 1)])
-            {
-                Form1.main.Status = ($"Дверь №{Number} машины {model} открыта");
-                Form1.isOpenedDoor[(int)(Number - 1)] = true;
-            }
-            else
-            {
-                Form1.main.Status = ($"Дверь №{_number} машины {model} закрыта");
-                Form1.isOpenedDoor[(int)(Number - 1)] = false;
-            }
-            
-        }
-
-        public override float Weight { get; set; }
-
+        public override int Weight { get; set; }
         public override string Name { get; set; }
+        public int Number { get; private set; }
 
-        public uint Number
+        private bool isOpen = true;
+        private Car ownerCar;
+
+        public Door(int number, Car ownerCar)
         {
-            get
-            {
-                return _number;
-            }            
+            this.Number = number;
+            this.ownerCar = ownerCar;
+        }
+
+        public void Open()
+        {
+            string ownerCarModel = ownerCar != null ? ownerCar.Model : string.Empty;
+            string openedDoorMessage = isOpen ? "открыта" : "закрыта";
+
+            Console.WriteLine($"Дверь №{Number} машины {ownerCarModel} {openedDoorMessage}");
+
+            isOpen = !isOpen;
         }
     }
 }

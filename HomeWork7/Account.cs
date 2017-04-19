@@ -15,19 +15,17 @@ namespace HomeWork7
 
         public void WithdrawMoney(uint Sum)
         {
-            if (Balance < Sum)
+           if (Balance >= Sum)
             {
-                Console.WriteLine("На счету недостаточно денег!");
-                Console.Read();
-                return;
+                Balance -= Sum;
+                Console.WriteLine($"Со счета было списано {Sum} рублей. Баланс: {Balance}!");
             }
-
-            Balance -= Sum;
         }
 
         public void DepositMoney(uint Sum)
         {
             Balance += Sum;
+            Console.WriteLine($"На счет было внесено {Sum} рублей. Баланс: {Balance}!");
         }
     }
 }

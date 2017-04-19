@@ -5,48 +5,32 @@ namespace HomeWork7
 {
     public class Operations
     {
-       public void CreateAccount(Employee employee, uint customerId)
+        public Account CreateAccount(Customer customer)
         {
-            if (employee.AccessLevel < 1)
+            return new Account(customer.CustomerId);
+        }
+
+        public void CloseAccount(Customer customer)
+        {
+            Bank bank = new Bank();            
+
+            foreach (var acc in bank.AccountsList)
             {
-                Console.WriteLine("Слишком низкий уровень доступа!");
-                Console.Read();
-                return;
+                if (acc.Number == customer.CustomerId)
+                {
+                    bank.AccountsList.Remove(acc);
+                }
             }
         }
 
-        public void CloseAccount(Employee employee, uint customerId)
+        public void DepositMoney(uint sum, uint accountNumber)
         {
-            if (employee.AccessLevel < 1)
-            {
-                Console.WriteLine("Слишком низкий уровень доступа!");
-                Console.Read();
-                return;
-            }
-        }
-
-        public void DepositMoney(Employee employee, uint sum, uint accountNumber)
-        {
-            if (employee.AccessLevel < 2)
-            {
-                Console.WriteLine("Слишком низкий уровень доступа!");
-                Console.Read();
-                return;
-            }
-
             Account account = new Account(accountNumber);
             account.DepositMoney(sum);
         }
 
-        public void WithdrawMoney(Employee employee, uint sum, uint accountNumber)
+        public void WithdrawMoney(uint sum, uint accountNumber)
         {
-            if (employee.AccessLevel < 2)
-            {
-                Console.WriteLine("Слишком низкий уровень доступа!");
-                Console.Read();
-                return;
-            }
-
             Account account = new Account(accountNumber);
             account.WithdrawMoney(sum);
         }

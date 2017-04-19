@@ -5,7 +5,7 @@ namespace HomeWork7
 {
     public class Employee : Human
     {
-        private bool IsBusy { get; set; }
+        public bool IsBusy { get; set; } = false;
         public uint PersonnelNumber { get; set; }
         public uint AccessLevel { get; set; }
 
@@ -15,5 +15,38 @@ namespace HomeWork7
             this.PersonnelNumber = personnelNumber;
             this.AccessLevel = accessLevel;
         }
+
+        public void ExcecuteOperation(Customer.Operation operation, Customer customer)
+        {
+            Operations operations = new Operations();
+
+            switch (operation)
+            {
+                case (Customer.Operation.CloseAccount):
+                    operations.CloseAccount(customer);
+                    break;
+
+                case (Customer.Operation.CreateAccount):
+                    operations.CreateAccount(customer);
+                    break;
+            }
+        }
+
+        public void ExcecuteOperation(Customer.Operation operation, uint sum, uint accountNumber)
+        {
+            Operations operations = new Operations();
+
+            switch (operation)
+            {
+                case (Customer.Operation.PutMoney):
+                    operations.DepositMoney(sum, accountNumber);
+                    break;
+
+                case (Customer.Operation.WithrowMoney):
+                    operations.WithdrawMoney(sum, accountNumber);
+                    break;
+            }
+        }
+
     }
 }

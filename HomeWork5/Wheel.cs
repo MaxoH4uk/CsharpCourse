@@ -1,30 +1,26 @@
-﻿namespace HomeWork5
+﻿using System;
+
+namespace HomeWork5
 {
-    class Wheel : Detail, IRotatable
+    public class Wheel : Detail, IMovable
     {
-        private uint _number { get; set; }
-
-        public Wheel(uint number) 
-            
-        {
-            _number = number;
-        }
-
-        public void Move(string model)
-        {
-            Form1.main.Status = ($"Колесо №{Number} машины {model} вращается");
-        }
-
-        public override float Weight { get; set; }
-
+        public override int Weight { get; set; }
         public override string Name { get; set; }
 
-        public uint Number
+        public int Number { get; private set; }
+
+        private Car ownerCar;
+
+        public Wheel(int number, Car ownerCar)
         {
-            get
-            {
-                return _number;
-            }            
+            this.Number = number;
+            this.ownerCar = ownerCar;
+        }
+
+        public void Move()
+        {
+            string carModel = ownerCar != null ? ownerCar.Model : string.Empty;
+            Console.WriteLine($"Колесо №{Number} машины {carModel} вращается");
         }
     }
 }

@@ -1,20 +1,23 @@
-﻿namespace HomeWork5
+﻿using System;
+
+namespace HomeWork5
 {
-    class Body : Detail, IRotatable, IDoor
+    public class Body : Detail, IMovable
     {
-        public void Open(string model)
-        {
-            Form1.main.Status = ("Увы, это не дверь");
-        }
-
-        public void Move(string model)
-        {
-            Form1.main.Status = ($"Машина {model} едет");
-
-        }
-
-        public override float Weight { get; set; }
-
+        public override int Weight { get; set; }
         public override string Name { get; set; }
+
+        private Car ownerCar;
+
+        public Body(Car ownerCar)
+        {
+            this.ownerCar = ownerCar;
+        }
+
+        public void Move()
+        {
+            string ownerCarModel = ownerCar != null ? ownerCar.Model : string.Empty;
+            Console.WriteLine($"Машина {ownerCarModel} едет");
+        }
     }
 }

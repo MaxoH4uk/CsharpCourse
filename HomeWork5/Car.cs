@@ -2,64 +2,30 @@
 
 namespace HomeWork5
 {
-    class Car : Detail
+    public class Car : Detail
     {
-        private uint _doorsCount { get; set; }
-        private uint _wheelsCount { get; set; }
-        private uint _doorNumber { get; set; }
-        private string _carName { get; set; }
-        private List<object> obj = new List<object>();
+        public List<Detail> Details { get; private set; }
+        public string Model { get; private set; }
+        public override int Weight { get; set; }
+        public override string Name { get; set; }
 
-        public Car(uint doorsCount, uint wheelsCount, uint doorNumber, string carName)
+        public Car(int countDoors, int countWheels, string model)
         {
-            _doorsCount = doorsCount;
-            _wheelsCount = wheelsCount;
-            _doorNumber = doorNumber;
-            _carName = carName;
-            if (Form1.buttonIsPressed == "Move")
+            Details = new List<Detail>();
+
+            for (int i = 0; i < countDoors; i++)
             {
-                for (uint i = 1; i <= wheelsCount; i++)
-                {
-                    Wheel whl = new Wheel(i);
-                    obj.Add(whl);
-                    whl.Move(_carName);
-                }
-                Body body = new Body();
-                obj.Add(body);
-                body.Move(_carName);
+                Details.Add(new Door(i, this));
             }
-            if (Form1.buttonIsPressed == "Open")
+
+            for (int i = 0; i < countWheels; i++)
             {
-                if(doorNumber == 0)
-                {
-                    Body body = new Body();
-                    body.Open(_carName);
-                }
-                else
-                {
-                    Door dr = new Door(doorNumber);
-                    obj.Add(dr);
-                    dr.Open(_carName);
-                }                
-            }            
-        }        
-
-        public override string Name
-        {
-            get; set;
-        }
-
-        public override float Weight
-        {
-            get; set;
-        }
-
-        public string Model
-        {
-            set
-            {
-                _carName = value;
+                Details.Add(new Wheel(i, this));
             }
+
+            Details.Add(new Body(this));
+
+            this.Model = model ?? string.Empty;
         }
     }
 }
