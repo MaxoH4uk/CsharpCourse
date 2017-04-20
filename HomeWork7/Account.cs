@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace HomeWork7
 {
@@ -15,17 +14,19 @@ namespace HomeWork7
 
         public void WithdrawMoney(uint Sum)
         {
-           if (Balance >= Sum)
+            if (Balance >= Sum)
             {
                 Balance -= Sum;
-                Console.WriteLine($"Со счета было списано {Sum} рублей. Баланс: {Balance}!");
+                Console.WriteLine($"Со счета №{Number} было списано {Sum} рублей. Баланс: {Balance} рублей!");
             }
+            else
+                Console.WriteLine($"Вы хотите снять {Sum} рублей, но Ваш баланс составляет: {Balance} рублей!");
         }
 
         public void DepositMoney(uint Sum)
         {
             Balance += Sum;
-            Console.WriteLine($"На счет было внесено {Sum} рублей. Баланс: {Balance}!");
+            Console.WriteLine($"На счет №{Number} было внесено {Sum} рублей. Баланс: {Balance} рублей!");
         }
     }
 }

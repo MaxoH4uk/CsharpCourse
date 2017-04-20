@@ -1,36 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Threading;
 
 namespace HomeWork7
 {
     class Program
-    {    
+    {
         static void Main(string[] args)
         {
+#region начальная_инициализация
             Bank bank = new Bank();
 
-            bank.Employees.Add(new Employee("Ivan", "Ivanov", 1, 1));
-            bank.Employees.Add(new Employee("Sidor", "Sidorov", 4, 2));
+            bank.Employees.Add(new Employee("Ivan", "Ivanov", 1, Role.Manager));
+            bank.Employees.Add(new Employee("Sidor", "Sidorov", 4, Role.Administrator));
 
-            bank.Customers.Add(new Customer("Semen", "Semenov", 1));
-            bank.Customers.Add(new Customer("Petr", "Petrov", 2));
+            bank.Customers.Add(new Customer("Semen", "Semenov", 11567));
+            bank.Customers.Add(new Customer("Petr", "Petrov", 11568));
+            bank.Customers.Add(new Customer("Semen", "Semenov", 11569));
 
-            var querry = Customer.Operation.PutMoney;
-            var employee = bank.Customers[0].GetEmployee(querry, bank.Employees);            
+            Bank.AccountsList.Add(new Account(11567));
+            Bank.AccountsList.Add(new Account(11568));
+#endregion           
 
-            if (employee == null)
+            try
             {
-                Console.WriteLine("Свободных сотрудников, соответствующих Вашему запросу сейчас нет!");
+                //внесем деньги на счет клиента
+                var employee = bank.GetEmployee(Operation.DepositMoney, bank.Customers[0]);
+                if (employee == null)
+                    return;
+                employee.ExcecuteOperation(Operation.DepositMoney, 123, bank.GetCustomerAccount(bank.Customers[0]), DateTime.Now);
+                Console.WriteLine();
+
+                //снимем деньги со счета клиента
+                employee = bank.GetEmployee(Operation.WithdrawMoney, bank.Customers[0]);                
+                if (employee == null)
+                    return;
+                employee.ExcecuteOperation(Operation.WithdrawMoney, 12, bank.GetCustomerAccount(bank.Customers[0]), DateTime.Now);
+                Console.WriteLine();
+
+                //создадим счет клиента
+                employee = bank.GetEmployee(Operation.CreateAccount, bank.Customers[2]);
+                if (employee == null)
+                    return;
+                employee.ExcecuteOperation(Operation.CreateAccount, bank.Customers[2], DateTime.Now);
+                Console.WriteLine();
+
+                //закроем счет клиента
+                employee = bank.GetEmployee(Operation.CloseAccount, bank.Customers[2]);
+                if (employee == null)
+                    return;
+                employee.ExcecuteOperation(Operation.CloseAccount, bank.Customers[2], DateTime.Now);
+                Console.WriteLine();
+
                 Console.Read();
-                return;
             }
 
-            employee.IsBusy = true;
-            employee.ExcecuteOperation(querry, 123, bank.Customers[0].CustomerId);
-            querry = Customer.Operation.WithrowMoney;
-            employee.ExcecuteOperation(querry, 12, bank.Customers[0].CustomerId);
-
-            Console.Read();
-        }      
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.Read();
+            }
+        }
     }
 }

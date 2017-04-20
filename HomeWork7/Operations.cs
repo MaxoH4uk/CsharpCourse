@@ -1,37 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace HomeWork7
 {
     public class Operations
     {
-        public Account CreateAccount(Customer customer)
+        public void CreateAccount(Customer customer)
         {
-            return new Account(customer.CustomerId);
+            Bank.AccountsList.Add(new Account(customer.CustomerId));
+            Console.WriteLine($"Счет с номером {customer.CustomerId}, владелец которого {customer.Name} {customer.Surname} был успешно открыт!");
         }
 
         public void CloseAccount(Customer customer)
         {
-            Bank bank = new Bank();            
-
-            foreach (var acc in bank.AccountsList)
+            foreach (var acc in Bank.AccountsList)
             {
                 if (acc.Number == customer.CustomerId)
                 {
-                    bank.AccountsList.Remove(acc);
+                    Bank.AccountsList.Remove(acc);
+                    Console.WriteLine($"Счет №{acc.Number}, владелец которого {customer.Name} {customer.Surname} был закрыт!");
+                    break;
                 }
             }
         }
 
-        public void DepositMoney(uint sum, uint accountNumber)
+        public void DepositMoney(uint sum, Account account)
         {
-            Account account = new Account(accountNumber);
             account.DepositMoney(sum);
         }
 
-        public void WithdrawMoney(uint sum, uint accountNumber)
+        public void WithdrawMoney(uint sum, Account account)
         {
-            Account account = new Account(accountNumber);
             account.WithdrawMoney(sum);
         }
     }
