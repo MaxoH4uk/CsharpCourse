@@ -6,18 +6,18 @@ namespace HomeWork7
     {
         public void CreateAccount(Customer customer)
         {
-            Bank.AccountsList.Add(new Account(customer.CustomerId));
+            Bank.AccountsList.Add(new Account(customer));
             Console.WriteLine($"Счет с номером {customer.CustomerId}, владелец которого {customer.Name} {customer.Surname} был успешно открыт!");
         }
 
-        public void CloseAccount(Customer customer)
+        public void CloseAccount(uint customerId)
         {
             foreach (var acc in Bank.AccountsList)
             {
-                if (acc.Number == customer.CustomerId)
+                if (acc.Number == customerId)
                 {
                     Bank.AccountsList.Remove(acc);
-                    Console.WriteLine($"Счет №{acc.Number}, владелец которого {customer.Name} {customer.Surname} был закрыт!");
+                    Console.WriteLine($"Счет №{acc.Number} был закрыт!");
                     break;
                 }
             }

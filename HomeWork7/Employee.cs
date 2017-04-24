@@ -10,8 +10,8 @@ namespace HomeWork7
 
     public class Employee : Human
     {
-        public bool IsBusy { get; set; } = false;
-        public uint PersonnelNumber { get; set; }
+        public bool IsBusy { get; private set; } = false;
+        public uint PersonnelNumber { get; private set; }
         public Role Role { get; }
 
         public Employee(string name, string surname, uint personnelNumber, Role role)
@@ -34,7 +34,7 @@ namespace HomeWork7
             switch (operation)
             {
                 case (Operation.CloseAccount):
-                    operations.CloseAccount(customer);
+                    operations.CloseAccount(customer.CustomerId);
                     this.IsBusy = false;
                     break;
 

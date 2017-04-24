@@ -4,12 +4,14 @@ namespace HomeWork7
 {
     public class Account
     {
-        public uint Number { get; set; }
-        public uint Balance { get; set; }
+        public uint Number { get; private set; }
+        public uint Balance { get; private set; }
+        public Customer CustomerOwner { get; private set; }
 
-        public Account(uint accountNumber)
+        public Account(Customer customerOwner)
         {
-            Number = accountNumber;
+            this.Number = customerOwner.CustomerId;
+            this.CustomerOwner = customerOwner;
         }
 
         public void WithdrawMoney(uint Sum)

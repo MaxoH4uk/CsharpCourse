@@ -10,7 +10,7 @@
 
     public class Customer : Human
     {
-        public uint CustomerId { get; set; }
+        public uint CustomerId { get; private set; }
 
         public Customer(string name, string surname, uint customerId)
             : base(name, surname)

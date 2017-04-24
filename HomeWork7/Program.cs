@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Threading;
 
 namespace HomeWork7
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -17,8 +16,8 @@ namespace HomeWork7
             bank.Customers.Add(new Customer("Petr", "Petrov", 11568));
             bank.Customers.Add(new Customer("Semen", "Semenov", 11569));
 
-            Bank.AccountsList.Add(new Account(11567));
-            Bank.AccountsList.Add(new Account(11568));
+            Bank.AccountsList.Add(new Account(bank.Customers[0]));
+            Bank.AccountsList.Add(new Account(bank.Customers[1]));
 #endregion           
 
             try
